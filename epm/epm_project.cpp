@@ -338,7 +338,7 @@ void saveEmployees() {
             << employees[i].name << "|"
             << employees[i].username << "|"
             << employees[i].age << "|"
-            << employees[i].phone << "|"
+            << "0" << employees[i].phone << "|"
             << employees[i].role << "|"
             << employees[i].basicSalary << "|"
             << employees[i].bonus << "|"
@@ -544,7 +544,7 @@ void updateEmployee(long long empId)
 
     cout << "Current Name: " << employees[index].name << endl;
     cout << "Enter New Name: ";
-    getline(cin, employees[index].name);
+    getline(cin >> ws, employees[index].name);
 
     cout << "Current Salary: " << employees[index].basicSalary << endl;
     cout << "Enter New Salary: ";
@@ -923,7 +923,7 @@ long long  getValidId() {
     }
 }
 
-void viewAllEmployeesData() {
+void viewAllEmployees() {
     cout << "\n========================================\n";
     cout << "          ALL EMPLOYEES REPORT          \n";
     cout << "========================================\n";
@@ -933,6 +933,9 @@ void viewAllEmployeesData() {
         cout << "========================================\n";
         return;
     }
+
+    // 1. Save the original index so we don't break the system state
+    int originalIndex = currentEmployeeIndex;
 
     // 2. Loop through all employees
     for (int i = 0; i < employeeCount; i++) {
@@ -946,4 +949,7 @@ void viewAllEmployeesData() {
         viewSalary();
         viewAttendance();
     }
+
+    // 3. Restore the original index when finished
+    currentEmployeeIndex = originalIndex;
 }//mahmoud 
